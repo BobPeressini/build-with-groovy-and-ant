@@ -1,5 +1,7 @@
 from openjdk:18-jdk-alpine3.13
 
+RUN apk add --update bash
+
 #Create Ant Dir
 RUN mkdir -p /opt/ant/
 #Download And 1.9.8
@@ -10,15 +12,15 @@ RUN tar -xvzf /opt/ant/apache-ant-1.9.8-bin.tar.gz -C /opt/ant/
 RUN rm -f /opt/ant/apache-ant-1.9.8-bin.tar.gz
 
 #Install GIT
-RUN apk --update add git
+#RUN apk --update add git
 #Install Curl
-RUN apk --update add curl
+#RUN apk --update add curl
 #Setting Ant Home
-ENV ANT_HOME=/opt/ant/apache-ant-1.9.8
+#ENV ANT_HOME=/opt/ant/apache-ant-1.9.8
 #Setting Ant Params
-ENV ANT_OPTS="-Xms256M -Xmx512M"
+#ENV ANT_OPTS="-Xms256M -Xmx512M"
 #Updating Path
-ENV PATH="${PATH}:${HOME}/bin:${ANT_HOME}/bin"
+#ENV PATH="${PATH}:${HOME}/bin:${ANT_HOME}/bin"
 
 #USER root
 #RUN apt-get update -qq \
@@ -36,3 +38,4 @@ ENV PATH="${PATH}:${HOME}/bin:${ANT_HOME}/bin"
 #ENTRYPOINT ["java", "-jar","java-jenkins-docker.jar"]
 #EXPOSE 8080
 
+ENTRYPOINT sleep infinity
