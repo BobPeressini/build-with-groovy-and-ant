@@ -1,15 +1,26 @@
-from openjdk:18-jdk-alpine3.13
+FROM openjdk:18-jdk-alpine3.13
 
 RUN apk add --update bash
 
-#Create Ant Dir
-RUN mkdir -p /opt/ant/
-#Download And 1.9.8
-RUN wget http://archive.apache.org/dist/ant/binaries/apache-ant-1.9.8-bin.tar.gz -P /opt/ant
-#Unpack Ant
-RUN tar -xvzf /opt/ant/apache-ant-1.9.8-bin.tar.gz -C /opt/ant/
-# Remove tar file
-RUN rm -f /opt/ant/apache-ant-1.9.8-bin.tar.gz
+ENV ANT_VERSION 1.9.8
+RUN cd && \
+    wget -q http://archive.apache.org/dist/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz && \
+    tar -xzf apache-ant-${ANT_VERSION}-bin.tar.gz && \
+    mv apache-ant-${ANT_VERSION} /opt/ant && \
+    rm apache-ant-${ANT_VERSION}-bin.tar.gz
+ENV ANT_HOME /opt/ant
+ENV PATH ${PATH}:/opt/ant/bin
+RUN ant -version
+
+ENV GROOVY_VERSION=3.0.9
+RUN cd && \
+    wget https://archive.apache.org/dist/groovy/3.0.9/distribution/apache-groovy-binary-$GROOVY_VERSION.zip && \
+    unzip apache-groovy-binary-$GROOVY_VERSION.zip && \
+    mv groovy-$GROOVY_VERSION /opt/groovy && \
+    rm apache-groovy-binary-$GROOVY_VERSION.zip
+ENV GROOVY_HOME /opt/groovy
+ENV PATH ${PATH}:/opt/groovy/bin
+RUN groovy -version
 
 #Install GIT
 #RUN apk --update add git
