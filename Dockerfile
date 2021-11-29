@@ -1,4 +1,4 @@
-FROM openjdk:18-jdk-alpine3.13
+FROM openjdk:8-jdk-alpine
 
 RUN apk add --update bash
 
