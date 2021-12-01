@@ -1,5 +1,13 @@
 FROM openjdk:8-jdk-alpine
 
+#/app # cat /etc/os-release
+#NAME="Alpine Linux"
+#ID=alpine
+#VERSION_ID=3.9.4
+#PRETTY_NAME="Alpine Linux v3.9"
+#HOME_URL="https://alpinelinux.org/"
+#BUG_REPORT_URL="https://bugs.alpinelinux.org/"
+
 RUN apk add --update bash
 
 ENV ANT_VERSION 1.9.8
