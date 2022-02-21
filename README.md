@@ -1,4 +1,4 @@
-# build-with-groovy-and-ant
+# build-with-groovy-and-ant project
 
 Create an image with OpenJDK 11, Ant and Groovy running in Alpine.
 
