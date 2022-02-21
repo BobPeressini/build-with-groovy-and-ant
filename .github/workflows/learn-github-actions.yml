@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ENV_DEFAULT_JSON_FILE: ".github/configs/env_default.json"
-      ENV_JSON_FILE: ".github/configs/env_${{env.GITHUB_ACTOR}}.json"
+      ENV_JSON_FILE: ".github/configs/env_$GITHUB_ACTOR.json""
 
     steps:
       - uses: actions/checkout@v2
