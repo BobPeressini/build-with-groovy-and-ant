@@ -13,8 +13,9 @@ jobs:
           prefix: test
           
       - name: Show output
-        run: echo "This is the ${{ env.test_value }}"
-        run: echo "This is ${{ env.GITHUB_ACTOR }}"
+        run: |
+          echo "This is the ${{ env.test_value }}"
+          echo "This is ${{ env.GITHUB_ACTOR }}"
 
 #   check-bats-version:
 #     runs-on: ubuntu-latest
