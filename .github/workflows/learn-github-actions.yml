@@ -13,7 +13,7 @@ jobs:
           prefix: test
           
       - name: Show output
-        run: echo "This is the ${{ env.test_value }}"
+        run: echo "This is the ${{ env.test_value }} "
 
 #   check-bats-version:
 #     runs-on: ubuntu-latest
