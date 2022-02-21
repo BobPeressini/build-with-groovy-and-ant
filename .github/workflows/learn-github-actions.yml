@@ -12,28 +12,20 @@ jobs:
       - name: Set ENV_JSON_FILE
         run: echo "ENV_JSON_FILE=.github/configs/env_$GITHUB_ACTOR.json" >> $GITHUB_ENV
 
-      - name: Only run this if env_$GITHUB_ACTOR.json exists
+      - name: Check for $ENV_JSON_FILE
         run: '(test -f $ENV_JSON_FILE) || echo "ENV_JSON_FILE=$ENV_DEFAULT_JSON_FILE" >> $GITHUB_ENV'
 
-#        run: '(test -f .github/configs/env_$GITHUB_ACTOR.json && "ENV_JSON_FILE=.github/configs/env_$GITHUB_ACTOR.json" >> $GITHUB_ENV)' 
-         
-#       - name: Check for env_<user>.json file
-#         id: check_file
-#         uses: andstor/file-existence-action@v1
-#         with:
-#           files: "$ENV_JSON_FILE"
 
       - name: Show output
         run: |
           echo "This is the actor - $ENV_JSON_FILE"
              
-#       - name
-#       - name: JSON to variables
-#         uses: antifree/json-to-variables@v1.0.1
-#         with:
-#           filename: '.github/configs/test.json'
-#           prefix: test
-#           
+      - name: JSON to variables
+        uses: antifree/json-to-variables@v1.0.1
+        with:
+          filename: $ENV_JSON_FILE
+          prefix: test
+          
       - name: Show output 2
         run: |
           echo "This is the ${{ env.test_value }}"
