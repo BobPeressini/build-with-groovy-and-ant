@@ -4,23 +4,25 @@ jobs:
   env-var-tests:
     runs-on: ubuntu-latest
     env:
-      ENV_DEFAULT_JSON_FILE: ".github/configs/env_default.json"
+      ENV_JSON_FILE: ".github/configs/env_default.json"
 
     steps:
       - uses: actions/checkout@v2
       
-      - name: Set ENV_JSON_FILE
-        run: echo "ENV_JSON_FILE=.github/configs/env_$GITHUB_ACTOR.json" >> $GITHUB_ENV
+#       - name: Set ENV_JSON_FILE
+#         run: echo "ENV_JSON_FILE=.github/configs/env_$GITHUB_ACTOR.json" >> $GITHUB_ENV
 
-      - name: Check for env_<user>.json file
-        id: check_file
-        uses: andstor/file-existence-action@v1
-        with:
-          files: "$ENV_JSON_FILE"
+      - name: Only run this if env_$GITHUB_ACTOR.json exists
+        run: '(test -f .github/configs/env_$GITHUB_ACTOR.json && "ENV_JSON_FILE=.github/configs/env_$GITHUB_ACTOR.json" >> $GITHUB_ENV)' 
+         
+#       - name: Check for env_<user>.json file
+#         id: check_file
+#         uses: andstor/file-existence-action@v1
+#         with:
+#           files: "$ENV_JSON_FILE"
 
       - name: Show output
         run: |
-          echo "This is the default - $ENV_DEFAULT_JSON_FILE"
           echo "This is the actor - $ENV_JSON_FILE"
              
 #       - name
