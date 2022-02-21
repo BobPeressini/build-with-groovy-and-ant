@@ -4,16 +4,16 @@ jobs:
   env-var-tests:
     runs-on: ubuntu-latest
     env:
-      ENV_JSON_FILE: ".github/configs/env_default.json"
+      ENV_DEFAULT_JSON_FILE: ".github/configs/env_default.json"
 
     steps:
       - uses: actions/checkout@v2
       
-#       - name: Set ENV_JSON_FILE
-#         run: echo "ENV_JSON_FILE=.github/configs/env_$GITHUB_ACTOR.json" >> $GITHUB_ENV
+      - name: Set ENV_JSON_FILE
+        run: echo "ENV_JSON_FILE=.github/configs/env_$GITHUB_ACTOR.json" >> $GITHUB_ENV
 
       - name: Only run this if env_$GITHUB_ACTOR.json exists
-        run: '(test -f .github/configs/env_$GITHUB_ACTOR.json && echo found it )'
+        run: '(test ! -f $ENV_JSON_FILE && "ENV_JSON_FILE=$ENV_DEFAULT_JSON_FILE" >> $GITHUB_ENV )'
 
 #        run: '(test -f .github/configs/env_$GITHUB_ACTOR.json && "ENV_JSON_FILE=.github/configs/env_$GITHUB_ACTOR.json" >> $GITHUB_ENV)' 
          
