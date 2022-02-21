@@ -16,7 +16,7 @@ jobs:
         id: check_file
         uses: andstor/file-existence-action@v1
         with:
-          files: $ENV_JSON_FILE
+          files: "$ENV_JSON_FILE"
 
       - name: Show output
         run: |
