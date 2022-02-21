@@ -13,7 +13,7 @@ jobs:
         run: echo "ENV_JSON_FILE=.github/configs/env_$GITHUB_ACTOR.json" >> $GITHUB_ENV
 
       - name: Only run this if env_$GITHUB_ACTOR.json exists
-        run: '(test ! -f $ENV_JSON_FILE) || echo "ENV_JSON_FILE=$ENV_DEFAULT_JSON_FILE" >> $GITHUB_ENV'
+        run: '(test -f $ENV_JSON_FILE) || echo "ENV_JSON_FILE=$ENV_DEFAULT_JSON_FILE" >> $GITHUB_ENV'
 
 #        run: '(test -f .github/configs/env_$GITHUB_ACTOR.json && "ENV_JSON_FILE=.github/configs/env_$GITHUB_ACTOR.json" >> $GITHUB_ENV)' 
          
