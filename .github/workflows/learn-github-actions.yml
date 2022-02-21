@@ -5,17 +5,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
-      - name: JSON to variables
-        uses: antifree/json-to-variables@v1.0.1
+
+      - name: Check for env_<user>.json file
+        id: check_file
+        env:
+          ENV_DEFAULT_JSON_FILE: ".github/configs/env_default.json"
+          ENV_JSON_FILE: ".github/configs/env_$GITHUB_ACTOR.json"
+        uses: andstor/file-existence-action@v1
         with:
-          filename: '.github/configs/test.json'
-          prefix: test
-          
+          files: "$ENV_JSON_FILE"
+
       - name: Show output
         run: |
-          echo "This is the ${{ env.test_value }}"
-          echo "This is $GITHUB_ACTOR"
+          echo "This is the default - $ENV_DEFAULT_JSON_FILE"
+          echo "This is the actor - $ENV_JSON_FILE"
+             
+#       - name
+#       - name: JSON to variables
+#         uses: antifree/json-to-variables@v1.0.1
+#         with:
+#           filename: '.github/configs/test.json'
+#           prefix: test
+#           
+#       - name: Show output
+#         run: |
+#           echo "This is the ${{ env.test_value }}"
+#           echo "This is $GITHUB_ACTOR"
 
 #   check-bats-version:
 #     runs-on: ubuntu-latest
