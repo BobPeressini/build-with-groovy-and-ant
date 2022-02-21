@@ -21,9 +21,9 @@ jobs:
           filename: '.github/configs/env.json'
           prefix: test
           
-      - name: Show output 2
+      - name: Show custom environment variables
         run: |
-          echo "This is the ${{ env.test_value }}"
+          echo "Actor = ${{ env.test_actor }}"
 
 #   check-bats-version:
 #     runs-on: ubuntu-latest
