@@ -28,10 +28,10 @@ jobs:
 #           filename: '.github/configs/test.json'
 #           prefix: test
 #           
-#       - name: Show output
-#         run: |
-#           echo "This is the ${{ env.test_value }}"
-#           echo "This is $GITHUB_ACTOR"
+      - name: Show output 2
+        run: |
+          echo "This is the ${{ env.test_value }}"
+          echo "This is $GITHUB_ACTOR"
 
 #   check-bats-version:
 #     runs-on: ubuntu-latest
