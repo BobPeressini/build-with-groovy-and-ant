@@ -1,13 +1,26 @@
 name: learn-github-actions
 on: [push]
 jobs:
-  check-bats-version:
+  env-var-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      
+      - name: JSON to variables
+        uses: antifree/json-to-variables@v1.0.1
         with:
-          node-version: '14'
-      - run: npm install -g bats
-      - run: bats -v
+          filename: '.github/configs/test.json'
+          prefix: test
+          
+      - name: Show output
+        run: echo "This is the ${{ env.test_value }}"
 
+#   check-bats-version:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/setup-node@v2
+#         with:
+#           node-version: '14'
+#       - run: npm install -g bats
+#       - run: bats -v
